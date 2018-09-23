@@ -42,7 +42,7 @@ button {
   grid-template-columns: repeat(4, auto);
 }
 
-#open-file {
+#choose-file {
   grid-column: 1 / span 2;
   justify-self: center;
 }

@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
 const fs = require('fs');
 
 const { subParser } = require('./utils/sub-parser');
@@ -47,8 +47,22 @@ app.on('activate', function() {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow();
+    require('devtron').install();
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+const getFileFromUserSelection = (exports.getFileFromUserSelection = targetWindow => {
+  const files = dialog.showOpenDialog(targetWindow, {
+    properties: ['openFile'],
+    filters: [
+      { name: 'Subtitle Files', extensions: ['srt', 'subrip'] }
+    ]
+  });
+  if (!files) return;
+  return files[0];
+});
+
+const openFile = (exports.openFile = (targetWindow, filePath) => {
+  const file = filePath || getFileFromUserSelection(targetWindow);
+  targetWindow.webContents.send('file-opened', file, content);
+});
