@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const chooseFile = document.querySelector('#choose-file');
 const saveTo = document.querySelector('#save-file');
+const dragContainer = document.querySelector('#drag-container');
 
 let filePath = null;
 
