@@ -15,7 +15,7 @@ chooseFile.addEventListener('click', e => {
 });
 
 saveTo.addEventListener('click', e => {
-  console.log(e);
+  console.log(e.returnValue, e.path);
   dialog.showOpenDialog({
     properties: ['openDirectory']
   });
