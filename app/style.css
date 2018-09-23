@@ -37,6 +37,19 @@ button {
 .controls {
   background-color: rgb(217, 241, 238);
   padding: 10px 10px 10px 10px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+}
+
+#open-file {
+  grid-column: 1 / span 2;
+  justify-self: center;
+}
+
+#save-file {
+  grid-column: 3 / span 2;
+  justify-self: center;
 }
 
 button {
