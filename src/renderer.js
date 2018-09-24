@@ -10,21 +10,23 @@ const chooseFile = document.querySelector('#choose-file');
 const saveTo = document.querySelector('#save-file');
 const dragContainer = document.querySelector('#drag-container');
 
-let filePath = null;
+let filePathForSub = null;
+let dirPathForOutput = null;
 
 chooseFile.addEventListener('click', e => {
   const files = dialog.showOpenDialog({
     properties: ['openFile']
   });
-
-  console.log(files[0]);
+  filePathForSub = files[0];
+  console.log(filePathForSub, files[0]);
 });
 
 saveTo.addEventListener('click', e => {
   const directoryOfChoice = dialog.showOpenDialog({
     properties: ['openDirectory']
   });
-  console.log(directoryOfChoice);
+  dirPathForOutput = directoryOfChoice[0];
+  console.log(`dirPathForOutput:${dirPathForOutput}`);
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
