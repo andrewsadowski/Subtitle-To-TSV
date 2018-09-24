@@ -94,8 +94,13 @@ button:disabled {
 }
 
 #drag-container {
-  border: dotted 7px black;
   align-self: center;
   width: 250px;
   height: 250px;
+  border: dotted 3px black;
+  transition: border-width 0.2s linear;
+}
+
+#drag-container:hover {
+  border-width: 6px;
 }
