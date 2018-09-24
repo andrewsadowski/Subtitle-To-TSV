@@ -1,8 +1,6 @@
 <div align="center"> 
-<img width="250" height="250" src="https://s3-us-west-2.amazonaws.com/andrew-sadowski-images/Sub2TSV-Title.png">
+<img width="600" height="100" src="https://s3-us-west-2.amazonaws.com/andrew-sadowski-images/Sub2TSV-Title.png">
 </div>
-
-# Subtitle-To-TSV
 
 This Electron app parses an .srt file into an object, and then offers that data up in either CSV or TSV format, writing the TSV file to your local drive.
 
