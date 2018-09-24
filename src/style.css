@@ -70,3 +70,57 @@ button:active {
 button:disabled {
   background-color: rgb(196, 204, 202);
 }
+
+/*FlexBox*/
+
+.drag-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: stretch;
+  border: solid 1px black;
+  background: grey;
+  height: 100%;
+}
+
+#drag-text {
+  align-self: center;
+  top: -15;
+  flex-basis: content;
+}
+
+#drag-container {
+  border: dotted 7px green;
+  align-self: center;
+  width: 250px;
+  height: 250px;
+}
+
+/*Grid Implementation */
+
+/* 
+.drag-section {
+  display: grid;
+  border: solid 1px black;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  background: grey;
+  height: 100%;
+}
+
+#drag-text {
+  grid-column: 2 / span 2;
+  grid-row: 1;
+  justify-self: center;
+  align-self: stretch;
+}
+
+#drag-container {
+  border: dotted 7px green;
+  grid-column: 2 / auto;
+  grid-row: 2 / auto;
+  justify-self: center;
+  align-self: center;
+  width: 250px;
+  height: 250px;
+} */

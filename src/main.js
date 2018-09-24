@@ -15,7 +15,7 @@ function createWindow() {
   // and load the index.html of the app.
   // mainWindow.loadFile('index.html');
   mainWindow.loadURL(`file://${__dirname}/index.html`);
-
+  require('devtron').install();
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
@@ -47,7 +47,6 @@ app.on('activate', function() {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow();
-    require('devtron').install();
   }
 });
 
