@@ -4,6 +4,8 @@ const mainProcess = remote.require('./main');
 const currentWindow = remote.getCurrentWindow();
 const fs = require('fs');
 
+const { subParser } = require('./utils/sub-parser');
+
 const chooseFile = document.querySelector('#choose-file');
 const saveTo = document.querySelector('#save-file');
 const dragContainer = document.querySelector('#drag-container');
@@ -11,13 +13,23 @@ const dragContainer = document.querySelector('#drag-container');
 let filePath = null;
 
 chooseFile.addEventListener('click', e => {
-  // mainProcess.openFile(currentWindow);
-  console.log('object', e);
+  const files = dialog.showOpenDialog({
+    properties: ['openFile']
+  });
+
+  console.log(files[0]);
 });
 
 saveTo.addEventListener('click', e => {
-  console.log(e.returnValue, e.path);
-  dialog.showOpenDialog({
+  const directoryOfChoice = dialog.showOpenDialog({
     properties: ['openDirectory']
   });
+  console.log(directoryOfChoice);
+});
+
+ipcRenderer.on('file-opened', (event, file, content) => {
+  filePath = file;
+  originalContent = content;
+
+  console.log('IPCRENDERER FILE-OPENED', filePath, originalContent);
 });
