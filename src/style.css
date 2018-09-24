@@ -78,19 +78,23 @@ button:disabled {
   flex-direction: column;
   align-items: flex-start;
   align-content: stretch;
-  border: solid 1px black;
-  background: grey;
   height: 100%;
+  background: #4ca1af;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #c4e0e5, #4ca1af);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #c4e0e5, #4ca1af);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #drag-text {
   align-self: center;
-  top: -15;
   flex-basis: content;
+  font-family: 'Abril Fatface', cursive;
 }
 
 #drag-container {
-  border: dotted 7px green;
+  border: dotted 7px black;
   align-self: center;
   width: 250px;
   height: 250px;
