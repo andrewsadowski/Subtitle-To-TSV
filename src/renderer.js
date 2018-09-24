@@ -4,7 +4,7 @@ const mainProcess = remote.require('./main');
 const currentWindow = remote.getCurrentWindow();
 const fs = require('fs');
 
-const { subParser } = require('./utils/sub-parser');
+const { subParser, generateTSV } = require('./utils/sub-parser');
 
 const chooseFile = document.querySelector('#choose-file');
 const saveTo = document.querySelector('#save-file');
@@ -19,6 +19,14 @@ chooseFile.addEventListener('click', e => {
   });
   filePathForSub = files[0];
   console.log(filePathForSub, files[0]);
+  if (filePathForSub && dirPathForOutput) {
+    console.log(dirPathForOutput);
+    generateTSV(subParser(filePathForSub), dirPathForOutput);
+    // let content = subParser(filePathForSub);
+    // generateSub2TSV(content, dirPathForOutput);
+  } else if (!filePathForSub || !dirPathForOutput) {
+    alert('Please select a directory or subtitle');
+  }
 });
 
 saveTo.addEventListener('click', e => {
@@ -27,6 +35,13 @@ saveTo.addEventListener('click', e => {
   });
   dirPathForOutput = directoryOfChoice[0];
   console.log(`dirPathForOutput:${dirPathForOutput}`);
+
+  // if (filePathForSub && dirPathForOutput) {
+  //   generateSub2TSV(subParser(filePathForSub), dirPathForOutput);
+  //   console.log('created');
+  // } else if (!filePathForSub || !dirPathForOutput) {
+  //   alert('Please select a directory or subtitle');
+  // }
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
