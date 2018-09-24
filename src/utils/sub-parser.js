@@ -14,9 +14,9 @@ const subParser = file => {
   });
   return subArr;
 };
-const generateTSV = (contentArr, outputPath) => {
+const generateTSV = (contentArr, outputPath, fileName) => {
   let content = contentArr.join('\n');
-  let pathForOutput = path.join(outputPath + '/' + 'testOutput.tsv');
+  let pathForOutput = path.join(outputPath + '/' + fileName + '.tsv');
   fs.writeFile(pathForOutput, content, err => {
     if (err) throw err;
     console.log('file saved');

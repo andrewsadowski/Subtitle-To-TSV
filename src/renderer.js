@@ -12,20 +12,23 @@ const dragContainer = document.querySelector('#drag-container');
 
 let filePathForSub = null;
 let dirPathForOutput = null;
+let subtitleFileName = null;
 
 chooseFile.addEventListener('click', e => {
   const files = dialog.showOpenDialog({
     properties: ['openFile']
   });
   filePathForSub = files[0];
-  console.log(filePathForSub, files[0]);
+  subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, '');
+  subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
+
+  console.log(files);
   if (filePathForSub && dirPathForOutput) {
-    console.log(dirPathForOutput);
-    generateTSV(subParser(filePathForSub), dirPathForOutput);
-    // let content = subParser(filePathForSub);
-    // generateSub2TSV(content, dirPathForOutput);
-  } else if (!filePathForSub || !dirPathForOutput) {
-    alert('Please select a directory or subtitle');
+    generateTSV(
+      subParser(filePathForSub),
+      dirPathForOutput,
+      subtitleFileName
+    );
   }
 });
 
@@ -36,12 +39,12 @@ saveTo.addEventListener('click', e => {
   dirPathForOutput = directoryOfChoice[0];
   console.log(`dirPathForOutput:${dirPathForOutput}`);
 
-  // if (filePathForSub && dirPathForOutput) {
-  //   generateSub2TSV(subParser(filePathForSub), dirPathForOutput);
-  //   console.log('created');
-  // } else if (!filePathForSub || !dirPathForOutput) {
-  //   alert('Please select a directory or subtitle');
-  // }
+  if (filePathForSub && dirPathForOutput) {
+    generateTSV(subParser(filePathForSub), dirPathForOutput);
+    console.log('created');
+  } else {
+    alert('Please select a subtitle');
+  }
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
