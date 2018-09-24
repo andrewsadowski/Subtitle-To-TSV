@@ -14,6 +14,8 @@ let filePathForSub = null;
 let dirPathForOutput = null;
 let subtitleFileName = null;
 
+let dragged;
+
 chooseFile.addEventListener('click', e => {
   const files = dialog.showOpenDialog({
     properties: ['openFile']
@@ -46,6 +48,26 @@ saveTo.addEventListener('click', e => {
     alert('Please select a subtitle');
   }
 });
+
+document.addEventListener(
+  'dragover',
+  e => {
+    e.preventDefault();
+    return false;
+  },
+  false
+);
+
+document.addEventListener(
+  'drop',
+  e => {
+    e.preventDefault();
+    filePathForSub = e.dataTransfer.files[0].path;
+    console.log(`FilePathForSub${filePathForSub}`);
+    return false;
+  },
+  false
+);
 
 ipcRenderer.on('file-opened', (event, file, content) => {
   filePath = file;
