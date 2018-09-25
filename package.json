@@ -1,20 +1,27 @@
 {
-  "name": "electron-subtitle2csv",
+  "name": "subtitle-to-tsv",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
+  "build": {
+    "appId": "subtitle2TSV",
+    "mac": {
+      "category": "com.electron.subtitle2TSV"
+    }
+  },
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^1.8.4",
     "subtitles-parser": "0.0.2"
   },
   "devDependencies": {
     "devtron": "^1.4.0",
+    "electron": "^1.8.4",
     "electron-builder": "^20.28.4"
   }
 }

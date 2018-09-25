@@ -100,6 +100,7 @@ button:disabled {
   align-self: center;
   flex-basis: content;
   font-family: 'Abril Fatface', cursive;
+  font-size: 20px;
 }
 
 #drag-container {
