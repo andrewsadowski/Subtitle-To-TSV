@@ -66,6 +66,7 @@ button {
   border: none;
   font-size: 12px;
   padding: 0.5em 0.5em;
+  border-radius: 5px;
 }
 
 button:hover {

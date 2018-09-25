@@ -68,6 +68,14 @@ execute.addEventListener('click', e => {
   chooseFile.classList.remove('completed');
 });
 
+/**
+ * DragOver Logic
+ *  -Prevents Electron from showing the .srt when dragging in
+ *  -Saves and updates filePathForSub variable on drag
+ * TODO: Make drag take both directory and single subtitle
+ * TODO: Add default folder location (origin path)
+ */
+
 document.addEventListener(
   'dragover',
   e => {
@@ -88,9 +96,9 @@ document.addEventListener(
   false
 );
 
-ipcRenderer.on('file-opened', (event, file, content) => {
-  filePath = file;
-  originalContent = content;
+// ipcRenderer.on('file-opened', (event, file, content) => {
+//   filePath = file;
+//   originalContent = content;
 
-  console.log('IPCRENDERER FILE-OPENED', filePath, originalContent);
-});
+//   console.log('IPCRENDERER FILE-OPENED', filePath, originalContent);
+// });
