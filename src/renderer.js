@@ -17,6 +17,12 @@ let subtitleFileName = null;
 
 let dragged;
 
+/**
+ * ChooseFile button event listener
+ *  -updates filePathForSub variable with path info
+ *  -onClick adds 'completed' class to DOM element
+ */
+
 chooseFile.addEventListener('click', e => {
   const files = dialog.showOpenDialog({
     properties: ['openFile']
@@ -28,6 +34,12 @@ chooseFile.addEventListener('click', e => {
   console.log(files);
   chooseFile.classList.add('completed');
 });
+
+/**
+ * SaveTo button event listener
+ *  -updated dirPathForOutput variable with output path
+ *  -onClick adds 'completed' class to DOM element
+ */
 
 saveTo.addEventListener('click', e => {
   const directoryOfChoice = dialog.showOpenDialog({
@@ -47,10 +59,10 @@ execute.addEventListener('click', e => {
     );
   }
   if (!filePathForSub) {
-    alert('Please provide a subtitle');
+    alert('Please provide a subtitle.');
   }
   if (!dirPathForOutput) {
-    alert('Please provide a directory to output to');
+    alert('Please provide a directory to output to.');
   }
   saveTo.classList.remove('completed');
   chooseFile.classList.remove('completed');
