@@ -8,6 +8,7 @@ const { subParser, generateTSV } = require('./utils/sub-parser');
 
 const chooseFile = document.querySelector('#choose-file');
 const saveTo = document.querySelector('#save-file');
+const execute = document.querySelector('#execute');
 const dragContainer = document.querySelector('#drag-container');
 
 let filePathForSub = null;
@@ -25,13 +26,7 @@ chooseFile.addEventListener('click', e => {
   subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
 
   console.log(files);
-  if (filePathForSub && dirPathForOutput) {
-    generateTSV(
-      subParser(filePathForSub),
-      dirPathForOutput,
-      subtitleFileName
-    );
-  }
+  chooseFile.classList.add('completed');
 });
 
 saveTo.addEventListener('click', e => {
@@ -40,13 +35,25 @@ saveTo.addEventListener('click', e => {
   });
   dirPathForOutput = directoryOfChoice[0];
   console.log(`dirPathForOutput:${dirPathForOutput}`);
+  saveTo.classList.add('completed');
+});
 
+execute.addEventListener('click', e => {
   if (filePathForSub && dirPathForOutput) {
-    generateTSV(subParser(filePathForSub), dirPathForOutput);
-    console.log('created');
-  } else {
-    alert('Please select a subtitle');
+    generateTSV(
+      subParser(filePathForSub),
+      dirPathForOutput,
+      subtitleFileName
+    );
   }
+  if (!filePathForSub) {
+    alert('Please provide a subtitle');
+  }
+  if (!dirPathForOutput) {
+    alert('Please provide a directory to output to');
+  }
+  saveTo.classList.remove('completed');
+  chooseFile.classList.remove('completed');
 });
 
 document.addEventListener(

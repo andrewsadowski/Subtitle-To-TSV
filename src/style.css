@@ -39,7 +39,11 @@ button {
   padding: 10px 10px 10px 10px;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(5, auto);
+}
+
+.completed {
+  background-color: rgb(141, 223, 139);
 }
 
 #choose-file {
@@ -47,16 +51,21 @@ button {
   justify-self: center;
 }
 
+#execute {
+  grid-column: 3;
+  justify-self: center;
+}
+
 #save-file {
-  grid-column: 3 / span 2;
+  grid-column: 4 / span 2;
   justify-self: center;
 }
 
 button {
   background-color: rgb(181, 220, 216);
   border: none;
-  font-size: 14px;
-  padding: 0.5em 1em;
+  font-size: 12px;
+  padding: 0.5em 0.5em;
 }
 
 button:hover {
