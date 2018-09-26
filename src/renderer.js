@@ -1,15 +1,15 @@
-const { remote, ipcRenderer } = require('electron');
-const { dialog } = require('electron').remote;
-const mainProcess = remote.require('./main');
+const { remote, ipcRenderer } = require("electron");
+const { dialog } = require("electron").remote;
+const mainProcess = remote.require("./main");
 const currentWindow = remote.getCurrentWindow();
-const fs = require('fs');
+const fs = require("fs");
 
-const { subParser, generateTSV } = require('./utils/sub-parser');
+const { subParser, generateTSV } = require("./utils/sub-parser");
 
-const chooseFile = document.querySelector('#choose-file');
-const saveTo = document.querySelector('#save-file');
-const execute = document.querySelector('#execute');
-const dragContainer = document.querySelector('#drag-container');
+const chooseFile = document.querySelector("#choose-file");
+const saveTo = document.querySelector("#save-file");
+const execute = document.querySelector("#execute");
+const dragContainer = document.querySelector("#drag-container");
 
 let filePathForSub = null;
 let dirPathForOutput = null;
@@ -17,21 +17,34 @@ let subtitleFileName = null;
 let defaultDirPath = null;
 
 /**
+ *
+ * @param {string} filePath - Accepts a filepath of the subtitle
+ * @return {string} defaultDirPath - Returns a default directory for saving
+ *
+ */
+
+const getDefaultDirPath = filePath => {
+  let parsedDirPath = filePath.replace(/[^\/]*$/, "");
+  defaultDirPath = parsedDirPath;
+  return parsedDirPath;
+};
+
+/**
  * ChooseFile button event listener
  *  -updates filePathForSub variable with path info
  *  -onClick adds 'completed' class to DOM element
  */
 
-chooseFile.addEventListener('click', e => {
+chooseFile.addEventListener("click", e => {
   const files = dialog.showOpenDialog({
-    properties: ['openFile']
+    properties: ["openFile"]
   });
   filePathForSub = files[0];
-  subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, '');
-  subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
+  subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, "");
+  subtitleFileName = subtitleFileName.replace(/(.srt)/, "");
 
   console.log(files);
-  chooseFile.classList.add('completed');
+  chooseFile.classList.add("completed");
 });
 
 /**
@@ -40,31 +53,27 @@ chooseFile.addEventListener('click', e => {
  *  -onClick adds 'completed' class to DOM element
  */
 
-saveTo.addEventListener('click', e => {
+saveTo.addEventListener("click", e => {
   const directoryOfChoice = dialog.showOpenDialog({
-    properties: ['openDirectory']
+    properties: ["openDirectory"]
   });
   dirPathForOutput = directoryOfChoice[0];
   console.log(`dirPathForOutput:${dirPathForOutput}`);
-  saveTo.classList.add('completed');
+  saveTo.classList.add("completed");
 });
 
-execute.addEventListener('click', e => {
+execute.addEventListener("click", e => {
   if (filePathForSub && dirPathForOutput) {
-    generateTSV(
-      subParser(filePathForSub),
-      dirPathForOutput,
-      subtitleFileName
-    );
+    generateTSV(subParser(filePathForSub), dirPathForOutput, subtitleFileName);
   }
   if (!filePathForSub) {
-    alert('Please provide a subtitle.');
+    alert("Please provide a subtitle.");
   }
   if (!dirPathForOutput) {
-    alert('Please provide a directory to output to.');
+    alert("Please provide a directory to output to.");
   }
-  saveTo.classList.remove('completed');
-  chooseFile.classList.remove('completed');
+  saveTo.classList.remove("completed");
+  chooseFile.classList.remove("completed");
 });
 
 /**
@@ -76,7 +85,7 @@ execute.addEventListener('click', e => {
  */
 
 document.addEventListener(
-  'dragover',
+  "dragover",
   e => {
     e.preventDefault();
     return false;
@@ -85,12 +94,12 @@ document.addEventListener(
 );
 
 document.addEventListener(
-  'drop',
+  "drop",
   e => {
     e.preventDefault();
     filePathForSub = e.dataTransfer.files[0].path;
-    subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, '');
-    subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
+    subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, "");
+    subtitleFileName = subtitleFileName.replace(/(.srt)/, "");
     console.log(
       `FilePathForSub${filePathForSub} \n subtitleFileName:${subtitleFileName}`
     );
