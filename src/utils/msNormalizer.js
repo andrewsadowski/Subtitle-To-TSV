@@ -1,16 +1,15 @@
 const parser = require("subtitles-parser");
 const fs = require("fs");
 
-//Parse and save srt
-const srt = fs.readFileSync(filePath, "utf8");
-const data = parser.fromSrt(srt);
-
 /**
- * @param {object} sub - a parsed object containing Index, StartTime/StopTime, Text
+ * @param {string} subPath - Path to subtitle file needing MS-normalization
  * @return {string} sub - returns a subtitle file (via fs) as well as a properly formatted srt
  */
 
-const msNormalizer = sub => {
+const msNormalizer = subPath => {
+  const srt = fs.readFileSync(subPath, "utf8");
+  const sub = parser.fromSrt(srt);
+
   for (let i = 0; i < sub.length; i++) {
     for (let j = i + 1; j <= i + 1; j++) {
       if (sub[j] === undefined) return;
@@ -33,8 +32,6 @@ const msNormalizer = sub => {
   }
   return sub;
 };
-
-msNormalizer(data);
 
 module.exports = {
   msNormalizer
