@@ -36,10 +36,11 @@ button {
 
 .controls {
   background-color: rgb(217, 241, 238);
-  padding: 10px 10px 10px 10px;
+  padding: 10px;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
 }
 
 .completed {
@@ -47,18 +48,27 @@ button {
 }
 
 #choose-file {
-  grid-column: 1 / span 2;
+  grid-column: 1;
   justify-self: center;
+  min-width: 80px;
+}
+
+#normalize-file {
+  grid-column: 2;
+  justify-self: center;
+  min-width: 80px;
 }
 
 #execute {
   grid-column: 3;
   justify-self: center;
+  min-width: 80px;
 }
 
 #save-file {
-  grid-column: 4 / span 2;
+  grid-column: 4;
   justify-self: center;
+  min-width: 80px;
 }
 
 button {

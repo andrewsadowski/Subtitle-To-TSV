@@ -5,6 +5,7 @@ const currentWindow = remote.getCurrentWindow();
 const fs = require("fs");
 
 const { subParser, generateTSV } = require("./utils/sub-parser");
+const { msNormalizer } = require('./utils/msNormalizer');
 
 const chooseFile = document.querySelector("#choose-file");
 const saveTo = document.querySelector("#save-file");
