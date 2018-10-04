@@ -5,7 +5,7 @@ const fs = require("fs");
  * @param {string} filePath - accepts a string with a path to the subtitle
  * @return {string} sub - returns a subtitle file as well as a properly formatted srt
  */
-const msNormalizer = (async filePath => {
+const msNormalizer = async filePath => {
   const srt = fs.readFileSync(filePath, "utf8");
 
   const parsedDirPath = getDefaultDirPath(filePath);
@@ -38,7 +38,7 @@ const msNormalizer = (async filePath => {
   }
 
   return sub;
-})(filePath);
+};
 
 module.exports = {
   msNormalizer

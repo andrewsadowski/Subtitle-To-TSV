@@ -13,9 +13,9 @@ const subParser = file => {
   let data = parser.fromSrt(srt);
   let subArr = [];
   data.forEach(sub => {
-    let output = `${sub.id}\t${sub.startTime} --> ${
-      sub.endTime
-    }\t${sub.text}\n`;
+    let output = `${sub.id}\t${sub.startTime} --> ${sub.endTime}\t${
+      sub.text
+    }\n`;
     subArr.push(output);
   });
   return subArr;
@@ -34,10 +34,8 @@ const subParser = file => {
  * @TODO: Currently adding superfluous line break by adding '\n' to join array
  */
 const generateTSV = (contentArr, outputPath, fileName) => {
-  let content = contentArr.join("\n");
-  let pathForOutput = path.join(
-    outputPath + "/" + fileName + ".tsv"
-  );
+  let content = contentArr.join("");
+  let pathForOutput = path.join(outputPath + "/" + fileName + ".tsv");
   fs.writeFile(pathForOutput, content, err => {
     if (err) throw err;
     console.log("file saved");
