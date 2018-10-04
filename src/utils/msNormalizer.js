@@ -2,36 +2,43 @@ const parser = require("subtitles-parser");
 const fs = require("fs");
 
 /**
- * @param {string} subPath - Path to subtitle file needing MS-normalization
- * @return {string} sub - returns a subtitle file (via fs) as well as a properly formatted srt
+ * @param {string} filePath - accepts a string with a path to the subtitle
+ * @return {string} sub - returns a subtitle file as well as a properly formatted srt
  */
+const msNormalizer = (async filePath => {
+  const srt = fs.readFileSync(filePath, "utf8");
 
-const msNormalizer = subPath => {
-  const srt = fs.readFileSync(subPath, "utf8");
-  const sub = parser.fromSrt(srt);
+  const parsedDirPath = getDefaultDirPath(filePath);
+  const subtitleFileName = getFileName(filePath);
+
+  const outputNameAndPath = path.join(
+    parsedDirPath + subtitleFileName + "_msUpdated.srt"
+  );
+
+  let sub = parser.fromSrt(srt);
 
   for (let i = 0; i < sub.length; i++) {
     for (let j = i + 1; j <= i + 1; j++) {
       if (sub[j] === undefined) return;
+      const msCheckAndUpdate = await (() => {
+        //save substring of MS for both preceeding start and end times
+        let iMS = sub[i].endTime.substr(9, 3);
+        let iSS = sub[i].endTime.substr(6, 2);
+        let jMS = sub[j].startTime.substr(9, 3);
+        let jSS = sub[j].startTime.substr(6, 2);
 
-      //save substring of MS for both preceeding start and end times
-      let iMS = sub[i].endTime.substr(9, 3);
-      let jMS = sub[j].startTime.substr(9, 3);
-
-      if (iMS > jMS) {
-        console.log(`iMS: ${iMS} should be the same as jMS: ${jMS}`);
-        sub[j].startTime = sub[j].startTime.replace(/\d{3}/g, iMS);
-      }
+        if (iMS > jMS && iSS === jSS) {
+          console.log(`iMS: ${iMS} should be the same as jMS: ${jMS}`);
+          sub[j].startTime = sub[j].startTime.replace(/\d{3}/g, iMS);
+        }
+      })();
     }
-
-    const updatedSrt = parser.toSrt(sub);
-    fs.writeFileSync("updatedTest.srt", updatedSrt, err => {
-      if (err) throw err;
-      console.log("Updated Srt created");
-    });
+    const updatedSrt = await parser.toSrt(sub);
+    await writeSubToFile(outputNameAndPath, updatedSrt);
   }
+
   return sub;
-};
+})(filePath);
 
 module.exports = {
   msNormalizer
