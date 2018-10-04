@@ -27,12 +27,6 @@ const subParser = file => {
  * @param {string} outputPath - Path to output directory
  * @param {string} fileName - Name of file without extension/path
  */
-
-/**
- * [Issues to Fix]
- *
- * @TODO: Currently adding superfluous line break by adding '\n' to join array
- */
 const generateTSV = (contentArr, outputPath, fileName) => {
   let content = contentArr.join("");
   let pathForOutput = path.join(outputPath + "/" + fileName + ".tsv");
