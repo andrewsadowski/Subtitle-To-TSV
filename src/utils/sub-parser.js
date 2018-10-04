@@ -1,6 +1,6 @@
-const parser = require('subtitles-parser');
-const fs = require('fs');
-const path = require('path');
+const parser = require("subtitles-parser");
+const fs = require("fs");
+const path = require("path");
 
 /**
  *
@@ -9,13 +9,13 @@ const path = require('path');
  */
 
 const subParser = file => {
-  let srt = fs.readFileSync(file, 'utf8');
+  let srt = fs.readFileSync(file, "utf8");
   let data = parser.fromSrt(srt);
   let subArr = [];
   data.forEach(sub => {
-    let output = `${sub.id}\t${sub.startTime} --> ${sub.endTime}\t${
-      sub.text
-    }\n`;
+    let output = `${sub.id}\t${sub.startTime} --> ${
+      sub.endTime
+    }\t${sub.text}\n`;
     subArr.push(output);
   });
   return subArr;
@@ -28,12 +28,19 @@ const subParser = file => {
  * @param {string} fileName - Name of file without extension/path
  */
 
+/**
+ * [Issues to Fix]
+ *
+ * @TODO: Currently adding superfluous line break by adding '\n' to join array
+ */
 const generateTSV = (contentArr, outputPath, fileName) => {
-  let content = contentArr.join('\n');
-  let pathForOutput = path.join(outputPath + '/' + fileName + '.tsv');
+  let content = contentArr.join("\n");
+  let pathForOutput = path.join(
+    outputPath + "/" + fileName + ".tsv"
+  );
   fs.writeFile(pathForOutput, content, err => {
     if (err) throw err;
-    console.log('file saved');
+    console.log("file saved");
   });
 };
 
