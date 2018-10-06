@@ -16,7 +16,7 @@ const msNormalizer = async filePath => {
   );
 
   let sub = parser.fromSrt(srt);
-
+  let updatedSrt;
   for (let i = 0; i < sub.length; i++) {
     for (let j = i + 1; j <= i + 1; j++) {
       if (sub[j] === undefined) return;
@@ -28,21 +28,15 @@ const msNormalizer = async filePath => {
         let jSS = sub[j].startTime.substr(6, 2);
 
         if (iMS > jMS && iSS === jSS) {
-          console.log(
-            `iMS: ${iMS} should be the same as jMS: ${jMS}`
-          );
-          sub[j].startTime = sub[j].startTime.replace(
-            /\d{3}/g,
-            iMS
-          );
+          console.log(`iMS: ${iMS} should be the same as jMS: ${jMS}`);
+          sub[j].startTime = sub[j].startTime.replace(/\d{3}/g, iMS);
         }
       })();
     }
-    const updatedSrt = await parser.toSrt(sub);
-    await writeSubToFile(outputNameAndPath, updatedSrt);
+    updatedSrt = await parser.toSrt(sub);
   }
 
-  return sub;
+  return updatedSrt;
 };
 
 /**
