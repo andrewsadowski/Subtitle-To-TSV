@@ -1,5 +1,5 @@
 <div align="center"> 
-<img width="600" height="100" src="https://s3-us-west-2.amazonaws.com/andrew-sadowski-images/Sub2TSV-Title.png">
+<img width="auto" height="auto" src="https://s3-us-west-2.amazonaws.com/andrew-sadowski-images/Sub2TSV-Title.png">
 </div>
 
 ### Overview
