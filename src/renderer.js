@@ -1,17 +1,15 @@
-const { remote, ipcRenderer } = require("electron");
-const { dialog } = require("electron").remote;
-const mainProcess = remote.require("./main");
+const { remote, ipcRenderer } = require('electron');
+const { dialog } = require('electron').remote;
+const mainProcess = remote.require('./main');
 const currentWindow = remote.getCurrentWindow();
-const fs = require("fs");
+const fs = require('fs');
 
-const { subParser, generateTSV } = require("./utils/sub-parser");
-const { msNormalizer } = require("./utils/msNormalizer");
+const { subParser, generateTSV } = require('./utils/sub-parser');
 
-const chooseFile = document.querySelector("#choose-file");
-const normalizeFile = document.querySelector("#normalize-file");
-const saveTo = document.querySelector("#save-file");
-const execute = document.querySelector("#execute");
-const dragContainer = document.querySelector("#drag-container");
+const chooseFile = document.querySelector('#choose-file');
+const saveTo = document.querySelector('#save-file');
+const execute = document.querySelector('#execute');
+const dragContainer = document.querySelector('#drag-container');
 
 let filePathForSub = null;
 let dirPathForOutput = null;
@@ -26,7 +24,7 @@ let defaultDirPath = null;
  */
 
 const getDefaultDirPath = filePath => {
-  let parsedDirPath = filePath.replace(/[^\/]*$/, "");
+  let parsedDirPath = filePath.replace(/[^\/]*$/, '');
   defaultDirPath = parsedDirPath;
   return parsedDirPath;
 };
@@ -37,28 +35,16 @@ const getDefaultDirPath = filePath => {
  *  -onClick adds 'completed' class to DOM element
  */
 
-chooseFile.addEventListener("click", e => {
+chooseFile.addEventListener('click', e => {
   const files = dialog.showOpenDialog({
-    properties: ["openFile"]
+    properties: ['openFile']
   });
   filePathForSub = files[0];
-  subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, "");
-  subtitleFileName = subtitleFileName.replace(/(.srt)/, "");
+  subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, '');
+  subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
 
   console.log(files);
-  chooseFile.classList.add("completed");
-});
-
-/**
- * NormalizeFile button event listener
- *  -looks for filePath
- *  -if present normalizes MS values
- *  -updates subtitle object
- */
-
-normalizeFile.addEventListener("click", e => {
-  console.log("normalizer init");
-  msNormalizer(filePathForSub);
+  chooseFile.classList.add('completed');
 });
 
 /**
@@ -67,27 +53,31 @@ normalizeFile.addEventListener("click", e => {
  *  -onClick adds 'completed' class to DOM element
  */
 
-saveTo.addEventListener("click", e => {
+saveTo.addEventListener('click', e => {
   const directoryOfChoice = dialog.showOpenDialog({
-    properties: ["openDirectory"]
+    properties: ['openDirectory']
   });
   dirPathForOutput = directoryOfChoice[0];
   console.log(`dirPathForOutput:${dirPathForOutput}`);
-  saveTo.classList.add("completed");
+  saveTo.classList.add('completed');
 });
 
-execute.addEventListener("click", e => {
-  if (filePathForSub && dirPathForOutput) {
-    generateTSV(subParser(filePathForSub), dirPathForOutput, subtitleFileName);
+execute.addEventListener('click', e => {
+  if ((filePathForSub && dirPathForOutput) || defaultDirPath) {
+    generateTSV(
+      subParser(filePathForSub),
+      dirPathForOutput || defaultDirPath,
+      subtitleFileName
+    );
   }
   if (!filePathForSub) {
-    alert("Please provide a subtitle.");
+    alert('Please provide a subtitle.');
   }
-  if (!dirPathForOutput) {
-    alert("Please provide a directory to output to.");
+  if (!dirPathForOutput && !defaultDirPath) {
+    alert('Please provide a directory to output to.');
   }
-  saveTo.classList.remove("completed");
-  chooseFile.classList.remove("completed");
+  saveTo.classList.remove('completed');
+  chooseFile.classList.remove('completed');
 });
 
 /**
@@ -95,26 +85,44 @@ execute.addEventListener("click", e => {
  *  -Prevents Electron from showing the .srt when dragging in
  *  -Saves and updates filePathForSub variable on drag
  * TODO: Make drag take both directory and single subtitle
- * TODO: Add default folder location (origin path)
  */
 
 document.addEventListener(
-  "dragover",
+  'dragover',
   e => {
     e.preventDefault();
+    e.stopPropagation();
     return false;
   },
   false
 );
 
+document.addEventListener('ondragstart', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+});
+
+document.addEventListener('ondragleave', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+});
+
+document.addEventListener('ondragend', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+});
+
 document.addEventListener(
-  "drop",
+  'drop',
   e => {
     e.preventDefault();
     filePathForSub = e.dataTransfer.files[0].path;
     getDefaultDirPath(filePathForSub);
-    subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, "");
-    subtitleFileName = subtitleFileName.replace(/(.srt)/, "");
+    subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, '');
+    subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
     console.log(
       `FilePathForSub${filePathForSub} \n subtitleFileName:${subtitleFileName}\ndefaultDirPath: ${defaultDirPath}`
     );
@@ -122,3 +130,9 @@ document.addEventListener(
   },
   false
 );
+ipcRenderer.on('file-opened', (event, file, content) => {
+  filePath = file;
+  originalContent = content;
+
+  console.log('IPCRENDERER FILE-OPENED', filePath, originalContent);
+});

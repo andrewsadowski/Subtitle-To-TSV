@@ -10,7 +10,11 @@ let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 430, height: 445, resizable: false });
+  mainWindow = new BrowserWindow({
+    width: 430,
+    height: 445,
+    resizable: false
+  });
 
   // and load the index.html of the app.
   // mainWindow.loadFile('index.html');
@@ -18,7 +22,9 @@ function createWindow() {
   // require('devtron').install();
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
-
+  mainWindow.webContents.on('will-navigate', ev => {
+    ev.preventDefault();
+  });
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
