@@ -50,7 +50,7 @@ button {
 #choose-file {
   grid-column: 1;
   justify-self: center;
-  min-width: 80px;
+  width: 100px;
 }
 
 /* #normalize-file {
@@ -62,13 +62,13 @@ button {
 #execute {
   grid-column: 2 / span 2;
   justify-self: center;
-  min-width: 100px;
+  width: 150px;
 }
 
 #save-file {
   grid-column: 4;
   justify-self: center;
-  min-width: 80px;
+  width: 100px;
 }
 
 button {
