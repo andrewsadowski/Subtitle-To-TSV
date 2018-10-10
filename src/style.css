@@ -118,7 +118,7 @@ button:disabled {
   align-self: center;
   width: 375px;
   height: 290px;
-  border: dotted 3px black;
+  border: dashed 3px black;
   transition: border-width 0.2s linear;
 }
 
