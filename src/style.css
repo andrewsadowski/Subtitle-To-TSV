@@ -116,8 +116,8 @@ button:disabled {
 
 #drag-container {
   align-self: center;
-  width: 250px;
-  height: 250px;
+  width: 375px;
+  height: 290px;
   border: dotted 3px black;
   transition: border-width 0.2s linear;
 }
