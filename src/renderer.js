@@ -130,9 +130,3 @@ document.addEventListener(
   },
   false
 );
-ipcRenderer.on('file-opened', (event, file, content) => {
-  filePath = file;
-  originalContent = content;
-
-  console.log('IPCRENDERER FILE-OPENED', filePath, originalContent);
-});
