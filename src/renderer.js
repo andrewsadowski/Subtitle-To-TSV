@@ -77,6 +77,9 @@ execute.addEventListener("click", e => {
   if (!dirPathForOutput && !defaultDirPath) {
     alert("Please provide a directory to output to.");
   }
+  // if (filePathForSub || defaultDirPath) {
+  //   execute.classList.add("ready");
+  // }
   saveTo.classList.remove("completed");
   chooseFile.classList.remove("completed");
 });
