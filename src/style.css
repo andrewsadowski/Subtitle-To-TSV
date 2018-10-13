@@ -89,6 +89,7 @@ button {
   background-color: rgb(181, 220, 216);
   border: none;
   font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
   padding: 0.5em 0.5em;
   border-radius: 5px;
 }
@@ -124,7 +125,7 @@ button:disabled {
 #drag-text {
   align-self: center;
   flex-basis: content;
-  font-family: 'Abril Fatface', cursive;
+  font-family: 'Gothic A1', sans-serif;
   font-size: 20px;
 }
 
