@@ -30,9 +30,9 @@ const getDefaultDirPath = filePath => {
 };
 
 /**
- * ChooseFile button event listener
- *  -updates filePathForSub variable with path info
- *  -onClick adds 'completed' class to DOM element
+ * * ChooseFile button event listener
+ * *  - updates filePathForSub variable with path info
+ * *  - onClick adds 'completed' class to DOM element
  */
 
 chooseFile.addEventListener('click', e => {
@@ -49,9 +49,9 @@ chooseFile.addEventListener('click', e => {
 });
 
 /**
- * SaveTo button event listener
- *  -updated dirPathForOutput variable with output path
- *  -onClick adds 'completed' class to DOM element
+ * * SaveTo button event listener
+ * * -updated dirPathForOutput variable with output path
+ * * -onClick adds 'completed' class to DOM element
  */
 
 saveTo.addEventListener('click', e => {
@@ -84,9 +84,9 @@ execute.addEventListener('click', e => {
 });
 
 /**
- * DragOver Logic
- *  -Prevents Electron from showing the .srt when dragging in
- *  -Saves and updates filePathForSub variable on drag
+ * * DragOver Logic
+ * * -Prevents Electron from showing the .srt when dragging in
+ * * -Saves and updates filePathForSub variable on drag
  * TODO: Make drag take both directory and single subtitle
  */
 
