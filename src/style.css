@@ -73,12 +73,6 @@ button {
   width: 100px;
 }
 
-/* #normalize-file {
-  grid-column: 2;
-  justify-self: center;
-  min-width: 80px;
-} */
-
 #execute {
   grid-column: 2 / span 2;
   justify-self: center;
