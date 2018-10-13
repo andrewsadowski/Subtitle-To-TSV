@@ -51,6 +51,22 @@ button {
   background-color: rgb(141, 223, 139);
 }
 
+.ready {
+  animation: colorChange 2s ease infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: #b5dcd8;
+  }
+  50% {
+    background-color: #52d850;
+  }
+  100% {
+    background-color: #b5dcd8;
+  }
+}
+
 #choose-file {
   grid-column: 1;
   justify-self: center;
