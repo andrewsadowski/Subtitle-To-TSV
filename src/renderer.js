@@ -3,6 +3,7 @@ const { dialog } = require('electron').remote;
 const mainProcess = remote.require('./main');
 const currentWindow = remote.getCurrentWindow();
 const fs = require('fs');
+const path = require('path');
 
 const { subParser, generateTSV } = require('./utils/sub-parser');
 
@@ -23,7 +24,7 @@ let defaultDirPath = null;
  *
  */
 const getDefaultDirPath = filePath => {
-  let parsedDirPath = filePath.replace(/[^\/]*$/, '');
+  let parsedDirPath = path.dirname(filePath);
   defaultDirPath = parsedDirPath;
   return parsedDirPath;
 };
