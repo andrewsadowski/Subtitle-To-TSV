@@ -140,3 +140,10 @@ button:disabled {
 #drag-container:hover {
   border-width: 6px;
 }
+
+.readyWithText::after {
+  content: 'Press Execute';
+  text-align: center;
+  align-self: center;
+  animation: colorChange 2s ease infinite;
+}

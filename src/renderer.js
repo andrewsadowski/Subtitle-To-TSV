@@ -22,7 +22,6 @@ let defaultDirPath = null;
  * @return {string} defaultDirPath - Returns a default directory for saving
  *
  */
-
 const getDefaultDirPath = filePath => {
   let parsedDirPath = filePath.replace(/[^\/]*$/, '');
   defaultDirPath = parsedDirPath;
@@ -70,7 +69,10 @@ execute.addEventListener('click', e => {
       dirPathForOutput || defaultDirPath,
       subtitleFileName
     );
-    alert(`A .tsv file has been created at: ${filePathForSub}`);
+    alert(
+      `Your file has been created at: ${dirPathForOutput ||
+        defaultDirPath}`
+    );
   }
   if (!filePathForSub) {
     alert('Please provide a subtitle.');
@@ -130,6 +132,7 @@ document.addEventListener(
       `FilePathForSub${filePathForSub} \n subtitleFileName:${subtitleFileName}\ndefaultDirPath: ${defaultDirPath}`
     );
     execute.classList.add('ready');
+    // dragContainer.classList.add('readyWithText');
     return false;
   },
   false
