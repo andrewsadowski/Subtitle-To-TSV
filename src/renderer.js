@@ -125,8 +125,7 @@ document.addEventListener(
     e.preventDefault();
     filePathForSub = e.dataTransfer.files[0].path;
     getDefaultDirPath(filePathForSub);
-    subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, '');
-    subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
+    subtitleFileName = path.basename(filePathForSub, '.srt');
     console.log(
       `FilePathForSub${filePathForSub} \n subtitleFileName:${subtitleFileName}\ndefaultDirPath: ${defaultDirPath}`
     );
