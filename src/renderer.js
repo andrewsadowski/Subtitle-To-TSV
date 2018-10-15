@@ -40,9 +40,7 @@ chooseFile.addEventListener('click', e => {
     properties: ['openFile']
   });
   filePathForSub = files[0];
-  subtitleFileName = filePathForSub.replace(/^.*[\\\/]/, '');
-  subtitleFileName = subtitleFileName.replace(/(.srt)/, '');
-
+  subtitleFileName = path.basename(filePathForSub, '.srt');
   console.log(files);
   chooseFile.classList.add('completed');
   execute.classList.add('ready');
