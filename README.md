@@ -12,6 +12,4 @@ This Electron app parses an .srt file and then offers that data up in TSV format
 
 ### Running Application
 
-Open the application, click 'Save To' to choose where to save the .tsv file on your computer. Then select the srt you want by clicking 'Choose File' or drag the .srt into the window. Then hit 'Execute' and the file will be created.
-
-Alternatively you can simply drag & drop the srt into the window, and press Execute. The .tsv file will be saved to the same directory the provided .srt resides.
+Open the application, select the srt you want processed or drag it into the window. Click 'Save To' to choose where to save the .tsv file on your computer or by default it will save to the home directory of the provided srt. If all went well, the 'Execute' button will flash, and you can click it to create the tsv file.
