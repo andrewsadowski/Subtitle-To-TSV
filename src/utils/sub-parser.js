@@ -29,11 +29,21 @@ const subParser = file => {
  */
 const generateTSV = (contentArr, outputPath, fileName) => {
   let content = contentArr.join("");
-  let pathForOutput = path.join(outputPath + "/" + fileName + ".tsv");
+  let pathForOutput = path.join(outputPath, fileName + ".tsv");
+  console.log(`pathForOutput:${pathForOutput}`);
   fs.writeFile(pathForOutput, content, err => {
     if (err) throw err;
     console.log("file saved");
   });
 };
+
+// const handleDirectory = inputPath => {
+//   const dirArr = fs.readdirSync(inputPath);
+//   const dirPath = inputPath;
+
+//   dirArr.forEach(file => {
+//     let filePath = path.join(dirPath, file);
+//   });
+// };
 
 module.exports = { subParser, generateTSV };
