@@ -37,13 +37,13 @@ const generateTSV = (contentArr, outputPath, fileName) => {
   });
 };
 
-// const handleDirectory = inputPath => {
-//   const dirArr = fs.readdirSync(inputPath);
-//   const dirPath = inputPath;
+const handleDirectory = inputPath => {
+  const dirArr = fs.readdirSync(inputPath);
+  const dirPath = inputPath;
 
-//   dirArr.forEach(file => {
-//     let filePath = path.join(dirPath, file);
-//   });
-// };
+  dirArr.forEach(file => {
+    let filePath = path.join(dirPath, file);
+  });
+};
 
 module.exports = { subParser, generateTSV };

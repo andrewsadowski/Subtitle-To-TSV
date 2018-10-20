@@ -3,9 +3,10 @@
 </div>
 <br />
 <p align="center">
-  <a href="https://img.shields.io/badge/npm-v.1.0.10-brightgreen.svg?style=flat-square" alt="npm package"></a>
+  <a href="https://www.npmjs.com/package/srt-ms-normalizer">
+  <img src="https://img.shields.io/badge/npm-v.1.0.10-brightgreen.svg?style=flat-square" alt="npm package" />
+  </a>
 </p>
-</brightgreen>
 
 ### Overview
 
