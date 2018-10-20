@@ -3,8 +3,11 @@
 </div>
 <br />
 <p align="center">
-  <a href="https://www.npmjs.com/package/srt-ms-normalizer">
-  <img src="https://img.shields.io/badge/npm-v.1.0.10-brightgreen.svg?style=flat-square" alt="npm package" />
+  <a href="https://github.com/andrewsadowski/Subtitle-To-TSV/releases/download/v1.1/subtitle-to-tsv-1.1.dmg">
+  <img src="https://img.shields.io/badge/MacOS-v.1.1-brightgreen.svg?style=flat-square" alt="MacOS dmg file" />
+  </a>
+    <a href="https://github.com/andrewsadowski/Subtitle-To-TSV/releases/download/v1.1/subtitle-to-tsv-1.1.exe">
+  <img src="https://img.shields.io/badge/Windows-v.1.1-brightgreen.svg?style=flat-square" alt="MacOS dmg file" />
   </a>
 </p>
 
