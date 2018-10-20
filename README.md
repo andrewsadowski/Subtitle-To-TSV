@@ -1,6 +1,11 @@
 <div align="center"> 
 <img width="auto" height="auto" src="https://s3-us-west-2.amazonaws.com/andrew-sadowski-images/Sub2TSV-Title.png">
 </div>
+<br>
+<p align="center">
+  <a href="https://img.shields.io/badge/npm-v.1.0.10-brightgreen.svg?style=flat-square" alt="npm package"></a>
+</p>
+</brightgreen>
 
 ### Overview
 
