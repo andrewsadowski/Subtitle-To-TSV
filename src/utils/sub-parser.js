@@ -1,6 +1,6 @@
-const parser = require("subtitles-parser");
-const fs = require("fs");
-const path = require("path");
+const parser = require('subtitles-parser');
+const fs = require('fs');
+const path = require('path');
 
 /**
  *
@@ -9,7 +9,7 @@ const path = require("path");
  */
 
 const subParser = file => {
-  let srt = fs.readFileSync(file, "utf8");
+  let srt = fs.readFileSync(file, 'utf8');
   let data = parser.fromSrt(srt);
   let subArr = [];
   data.forEach(sub => {
@@ -28,12 +28,12 @@ const subParser = file => {
  * @param {string} fileName - Name of file without extension/path
  */
 const generateTSV = (contentArr, outputPath, fileName) => {
-  let content = contentArr.join("");
-  let pathForOutput = path.join(outputPath, fileName + ".tsv");
+  let content = contentArr.join('');
+  let pathForOutput = path.join(outputPath, fileName + '.tsv');
   console.log(`pathForOutput:${pathForOutput}`);
   fs.writeFile(pathForOutput, content, err => {
     if (err) throw err;
-    console.log("file saved");
+    console.log('file saved');
   });
 };
 
@@ -41,9 +41,10 @@ const handleDirectory = inputPath => {
   const dirArr = fs.readdirSync(inputPath);
   const dirPath = inputPath;
 
-  dirArr.forEach(file => {
-    let filePath = path.join(dirPath, file);
+  let finalArr = dirArr.forEach(file => {
+    path.join(dirPath, file);
   });
+  return finalArr;
 };
 
 module.exports = { subParser, generateTSV };
